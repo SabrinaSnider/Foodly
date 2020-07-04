@@ -5,12 +5,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Ping',
-  data() {
+  data () {
     return {
-      msg: 'this is ping!',
-    };
+      msg: 'no data response'
+    }
   },
+  mounted () {
+    axios.get('http://localhost:5000/ping')
+    .then(
+      response => (this.msg = response.data)
+    )
+  }
 };
 </script>
