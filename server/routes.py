@@ -3,6 +3,7 @@ from scrapers.Publix import getItemLocation
 from flask import Blueprint
 from models import db
 from models.product import Product
+from flask import jsonify
 
 router = Blueprint('routes', __name__,)
 
@@ -13,6 +14,11 @@ def ping_pong():
 @router.route('/item/<string:item>', methods=['GET'])
 def itemLocation(item):
   return getItemLocation(item)
+
+@router.route('/all', methods=['GET'])
+def getAllProducts():
+  products = Product.query.all()
+  return jsonify([i.serialize() for i in products])
 
 @router.route('/add-item', methods=['POST'])
 def add_item():
