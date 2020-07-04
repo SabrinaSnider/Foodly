@@ -26,6 +26,6 @@ def add_item():
     publixLocation=location,
     obtained=False
   )
-  db.session.add(new_product)  # Adds new User record to database
-  db.session.commit()  # Commits all changes
+  db.session.add(new_product)
+  db.session.commit()
   return "Added " + product + " with location " + location
