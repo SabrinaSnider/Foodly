@@ -25,4 +25,16 @@ export default {
   padding: 0px;
   box-sizing: border-box;
 }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: $offWhite;
+}
+
+.page {
+  flex-grow: 1;
+}
 </style>

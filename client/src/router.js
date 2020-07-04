@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Ping from './components/Ping.vue';
+import ListHome from './views/ListHome.vue';
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,11 @@ export default new VueRouter({
       path: '/ping',
       name: 'Ping',
       component: Ping,
+    },
+    {
+      path: '/',
+      name: 'ListHome',
+      component: ListHome,
     }
   ],
 });

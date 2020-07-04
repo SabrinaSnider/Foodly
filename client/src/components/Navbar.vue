@@ -23,11 +23,8 @@ nav {
   justify-content: space-between;
   padding: 10px 60px;
   background-color: $green;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
   align-items: center;
+  position: sticky;
 
   // Shadow
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
