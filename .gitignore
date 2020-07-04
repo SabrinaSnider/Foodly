@@ -26,6 +26,7 @@ pnpm-debug.log*
 # Python server files
 server/env/
 __pycache__/
+db.sqlite3
 
 # Anaconda Notebook
 .ipynb_checkpoints

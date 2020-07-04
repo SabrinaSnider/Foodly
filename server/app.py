@@ -12,18 +12,22 @@ from models import db
 
 def create_app():
   app = Flask(__name__)
-  app.config.from_object('config.Config')
 
   # enable CORS
   CORS(app, resources={r'/*': {'origins': '*'}})
 
   # initialize database
+  app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
+  app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
   db.init_app(app)
 
-  # Import routes
-  app.register_blueprint(router)
+  # Create sql tables for our data models
+  with app.app_context():
+    db.create_all()
 
-  #db.create_all()  # Create sql tables for our data models
+  # import routes
+  app.register_blueprint(router)
 
   return app
 
