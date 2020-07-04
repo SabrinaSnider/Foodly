@@ -22,3 +22,12 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+@import '../scss/colors';
+
+p {
+  color: $orangeRed;
+}
+
+</style>
