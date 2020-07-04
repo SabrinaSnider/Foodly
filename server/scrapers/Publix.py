@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 STORE_COOKIE = "%7B%22StoreName%22%3A%22Butler%20Plaza%20West%22%2C%22StoreNumber%22%3A1312%2C%22Option%22%3A%22ACDFJNORU%22%2C%22ShortStoreName%22%3A%22Butler%20Plaza%20West%22%7D"
 
 def getPublixProductID(itemName):
