@@ -3,7 +3,8 @@ node_modules
 client/node_modules
 /dist
 
-# local env files
+# env files
+.env
 .env.local
 .env.*.local
 
@@ -23,8 +24,8 @@ pnpm-debug.log*
 *.sw?
 
 # Python server files
-server/__pycache__/testScraper.cpython-37.pyc
 server/env/
+__pycache__/
 
 # Anaconda Notebook
 .ipynb_checkpoints
