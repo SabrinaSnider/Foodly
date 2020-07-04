@@ -10,17 +10,20 @@ router = Blueprint('routes', __name__,)
 def ping_pong():
   return 'pong!'
 
-@router.route('/item/<string:item>')
+@router.route('/item/<string:item>', methods=['GET'])
 def itemLocation(item):
   return getItemLocation(item)
 
-# @router.route('/setdata', methods=['GET'])
-# def user_records():
-#   new_product = Product(
-#     name="cheerios",
-#     locaiton="filler",
-#     obtained=False
-#   )
-#   db.session.add(new_product)  # Adds new User record to database
-#   db.session.commit()  # Commits all changes
-#   return "product successfully created!"
+@router.route('/add-item', methods=['POST'])
+def add_item():
+  product = request.json["product"]
+  location = getItemLocation(product)
+
+  new_product = Product(
+    name=product,
+    publixLocation=location,
+    obtained=False
+  )
+  db.session.add(new_product)  # Adds new User record to database
+  db.session.commit()  # Commits all changes
+  return "Added " + product + " with location " + location
