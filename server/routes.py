@@ -11,10 +11,6 @@ router = Blueprint('routes', __name__,)
 def ping_pong():
   return 'pong!'
 
-@router.route('/item/<string:item>', methods=['GET'])
-def itemLocation(item):
-  return getItemLocation(item)
-
 @router.route('/all', methods=['GET'])
 def getAllProducts():
   products = Product.query.all()
