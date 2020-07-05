@@ -14,7 +14,8 @@ def create_app():
   app = Flask(__name__)
 
   # enable CORS
-  CORS(app, resources={r'/*': {'origins': '*'}})
+  CORS(app)
+  app.config['CORS_HEADERS'] = 'Content-Type'
 
   # initialize database
   app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite3"
