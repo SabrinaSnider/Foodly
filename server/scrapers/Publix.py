@@ -13,6 +13,27 @@ def getPublixProductID(itemName):
   
   return api_response["Products"][0]["Productid"]
 
+def parseLocation(location):
+  url = "https://services.publix.com/api/v3/product/Search?storeNumber=537&keyword=" + itemName
+  api_response = requests.get(url).json()
+  
+  if(len(api_response["Products"]) == 0):
+    return None
+  
+  return api_response["Products"][0]["Productid"]
+
+def extractLocation(location) :
+  split = location.split(' - ')
+  if len(split) > 1:
+    return {
+      "location": split[0],
+      "section": split[1],
+    }
+  else:
+    return {
+      "location": split[0]
+    }
+
 def getItemLocation(itemName):
   # Get product ID from Publix
   productID = getPublixProductID(itemName)
@@ -34,5 +55,6 @@ def getItemLocation(itemName):
   
   if len(locationTags) == 0: 
     return "unknown"
-    
-  return locationTags[0].find("span").get_text()
+  
+  location = locationTags[0].find("span").get_text()
+  return extractLocation(location)
