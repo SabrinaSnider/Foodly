@@ -7,7 +7,7 @@
         <Checkbox v-for="product in productList" :key="product.id" v-bind:product="product"></Checkbox>
       </ul>
       <div id="add-item">
-        <img id="add-item-icon" src="/plus.svg">
+        <img v-on:click="add" type="image" id="add-item-icon" src="/plus.svg">
         <input id="add-item-input" type="text" name="productName">
       </div>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 import Checkbox from '../components/Checkbox';
-import { getAllData } from '../listData'
+import { getAllData, addItem } from '../listData'
 
 export default {
   name: "ListView",
@@ -28,6 +28,11 @@ export default {
   },
   mounted () {
     getAllData().then(response => this.data = response.data)
+  },
+  methods: {
+    add: function add() {
+      addItem(document.getElementById("add-item-input").value)
+    }
   }
 }
 </script>
@@ -66,6 +71,7 @@ ul {
   height: 15px;
   width: 15px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 #add-item-input {
