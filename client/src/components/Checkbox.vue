@@ -27,6 +27,11 @@ export default {
 <style scoped lang="scss">
 @import '../scss/colors';
 
+input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
+
 .checkbox-item {
   font-size: 1.2rem;
   display: flex;
