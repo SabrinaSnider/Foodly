@@ -2,7 +2,7 @@
   <div id="list-container" class="page">
     <h2 id="store-name">{{$route.params.storeName | capitalize}} Shopping List</h2>
     <div id="list">
-      <ul v-for="(productList, aisle) in data" :id="location" v-bind:key="aisle">
+      <ul v-for="(productList, aisle) in data" v-bind:id="aisle" v-bind:key="aisle">
         <div class="aisle-header">
           <h3>{{aisle}}</h3><span></span>
         </div>

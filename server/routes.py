@@ -1,4 +1,5 @@
 from flask import request, render_template
+from flask_cors import cross_origin, CORS
 from scrapers.Publix import getPublixProductInfo
 from helper.pandasOperations import groupByLocation
 from flask import Blueprint
@@ -7,10 +8,7 @@ from models.product import Product
 from flask import jsonify
 
 router = Blueprint('routes', __name__,)
-
-@router.route('/ping', methods=['GET'])
-def ping_pong():
-  return 'pong!'
+CORS(router)
 
 @router.route('/all', methods=['GET'])
 def getAllProducts():
@@ -21,8 +19,9 @@ def getAllProducts():
   return jsonify(groupByLocation(jsonUnsoredTable, "publixAisle").to_dict())
 
 @router.route('/add-item', methods=['POST'])
+@cross_origin()
 def add_item():
-  name = request.json["product"]
+  name = request.json['product']
   productInfo = getPublixProductInfo(name)
 
   new_product = Product(
@@ -38,3 +37,11 @@ def add_item():
   db.session.add(new_product)
   db.session.commit()
   return jsonify(new_product.serialize())
+
+@router.route('/delete-item/<databaseId>', methods=['DELETE'])
+@cross_origin()
+def delete_item(databaseId):
+  Product.query.filter_by(id=databaseId).delete()
+  
+  db.session.commit()
+  return "Successfully deleted item"
