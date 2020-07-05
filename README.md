@@ -1,4 +1,4 @@
-# Project Title
+# Foodly
 
 Foodly is a grocery list web application that automatically gets product aisles for Publix and organizes the list accordingly.
 
