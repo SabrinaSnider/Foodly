@@ -2,7 +2,7 @@
   <div id="list-container" class="page">
     <h2 id="store-name">{{$route.params.storeName | capitalize}} Shopping List</h2>
     <div id="list">
-      <ul v-for="(productList, location) in data" :key="location">
+      <ul v-for="(productList, location) in data" :id="location" v-bind:key="location">
         <h3>{{location}}</h3>
         <Checkbox v-for="product in productList" :key="product.id" v-bind:product="product"></Checkbox>
       </ul>
@@ -32,7 +32,10 @@ export default {
   methods: {
     add: function add() {
       addItem(document.getElementById("add-item-input").value)
-      // .then(location.reload())
+      .then(response => {
+        console.log(response)
+        location.reload()
+      })
     }
   }
 }
