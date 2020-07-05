@@ -38,3 +38,11 @@ def add_item():
   db.session.add(new_product)
   db.session.commit()
   return jsonify(new_product.serialize())
+
+@router.route('/delete-item', methods=['DELETE'])
+def delete_item():
+  databaseId = request.json["id"]
+  Product.query.filter_by(id=databaseId).delete()
+  
+  db.session.commit()
+  return "Successfully deleted item"

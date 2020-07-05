@@ -1,6 +1,6 @@
 <template>
-  <div class="checkbox-item">
-    <input type="checkbox" :id="id" :required="obtained ? true : false">
+  <div :id="id" class="checkbox-item">
+    <input type="checkbox" :required="obtained ? true : false">
     <div class="checkbox-label">
       <label :for="id"> {{name}}</label>
       <label v-if="section" :for="id"> {{section}}</label>
