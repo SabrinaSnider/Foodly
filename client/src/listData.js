@@ -3,7 +3,7 @@ import axios from 'axios'
 let axiosConfig = { 
   headers: {
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "*"
   }
 }
 
@@ -17,4 +17,8 @@ export function addItem(product) {
     {product: product},
     axiosConfig
   );
+}
+
+export function removeItem(id) {
+  return axios.delete("http://localhost:5000/delete-item", id);
 }

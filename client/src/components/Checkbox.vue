@@ -2,13 +2,18 @@
   <div :id="id" class="checkbox-item">
     <input type="checkbox" :required="obtained ? true : false">
     <div class="checkbox-label">
-      <label :for="id"> {{name}}</label>
-      <label v-if="section" :for="id"> {{section}}</label>
+      <div>
+        <label :for="id"> {{name}}</label>
+        <label class="product-section" v-if="section" :for="id"> - {{section}}</label>
+      </div>
+      <img v-on:click="deleteCheckbox" type="image" class="delete-item-icon" src="/delete.svg">
     </div>
   </div>
 </template>
 
 <script>
+import { removeItem } from '../listData'
+
 export default {
   name: "Checkbox",
   props: ['product'],
@@ -21,6 +26,15 @@ export default {
       obtained: this.product.obtained,
     }  
   },
+  methods: {
+    deleteCheckbox: function () { 
+      removeItem(this.id)
+      .then(response => {
+        console.log(response)
+        location.reload()
+      })
+    }
+  }
 }
 </script>
 
@@ -47,4 +61,14 @@ input[type="checkbox"] {
   padding-left: 5px;
 }
 
+.product-section {
+  color: $gray;
+}
+
+.delete-item-icon {
+  height: 15px;
+  width: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+}
 </style>
