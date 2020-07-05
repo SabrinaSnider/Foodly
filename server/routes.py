@@ -1,5 +1,6 @@
 from flask import request, render_template
 from scrapers.Publix import getItemLocation
+from helper.pandasOperations import groupByLocation
 from flask import Blueprint
 from models import db
 from models.product import Product
@@ -14,7 +15,8 @@ def ping_pong():
 @router.route('/all', methods=['GET'])
 def getAllProducts():
   products = Product.query.all()
-  return jsonify([i.serialize() for i in products])
+  jsonUnsoredTable = [i.serialize() for i in products]
+  return jsonify(groupByLocation(jsonUnsoredTable, "publixLocation").to_dict())
 
 @router.route('/add-item', methods=['POST'])
 def add_item():
@@ -32,4 +34,4 @@ def add_item():
 
   db.session.add(new_product)
   db.session.commit()
-  return "Added " + product + " with location " + location["location"]
+  return jsonify(new_product.serialize())

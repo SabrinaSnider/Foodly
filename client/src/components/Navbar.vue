@@ -22,7 +22,6 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 60px;
-  background-color: $green;
   align-items: center;
   position: sticky;
 
@@ -36,13 +35,14 @@ h1 {
   display: inline;
   font-weight: 700;
   font-size: 1.6rem;
-  color: $offWhite;
+  color: $green;
+
 }
 
 a {
   background-color: transparent;
-  color: $offWhite;
-  font-size: 1.2rem;
+  color: $green;
+  font-size: 1.1rem;
   height: fit-content;
   padding: 3px 20px;
   vertical-align: middle;
@@ -52,11 +52,12 @@ a {
 
 a.bordered {
   border-radius: 3px;
-  border: 2px solid $offWhite;
+  border: 2px solid $green;
+
 }
 
 a.bordered:hover {
-  background-color: $offWhite;
-  color: $green;
+  background-color: $green;
+  color: white;
 }
 </style>
