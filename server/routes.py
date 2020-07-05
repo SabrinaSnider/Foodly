@@ -23,9 +23,13 @@ def add_item():
 
   new_product = Product(
     name=product,
-    publixLocation=location,
+    publixLocation=location["location"],
     obtained=False
   )
+
+  if "section" in location:
+    new_product.publixSection = location["section"]
+
   db.session.add(new_product)
   db.session.commit()
-  return "Added " + product + " with location " + location
+  return "Added " + product + " with location " + location["location"]
