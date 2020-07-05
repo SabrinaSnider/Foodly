@@ -8,7 +8,7 @@
       </ul>
       <div id="add-item">
         <img v-on:click="add" type="image" id="add-item-icon" src="/plus.svg">
-        <input id="add-item-input" type="text" name="productName">
+        <input id="add-item-input" type="text" name="productName" placeholder="add item">
       </div>
     </div>
   </div>
@@ -50,8 +50,15 @@ export default {
 }
 
 #store-name {
-  margin: 30px 0px;
+  margin-top: 30px;
+  padding: 10px;
   font-size: 2rem;
+  font-weight: 600;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  color: white;
+  background-color: $green;
 }
 
 ul {
@@ -60,8 +67,10 @@ ul {
 
 #list {
   background-color: white;
-  border: 1px solid $gray;
-  border-radius: 3px;
+  border: 1px solid $offWhite;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   padding: 20px;
 }
 
@@ -79,9 +88,9 @@ ul {
 }
 
 #add-item-input {
-  border: 1px solid $gray;
-  border-radius: 15px;
+  border: none;
   flex-grow: 1;
   font-size: 1.2rem;
+  padding: 3px 10px;
 }
 </style>

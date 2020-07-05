@@ -32,7 +32,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   min-height: 100vh;
-  background-color: $offWhite;
+  background-color: white;
 }
 
 .page {
