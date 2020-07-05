@@ -1,60 +1,35 @@
 import requests
-from bs4 import BeautifulSoup
 
-
-STORE_COOKIE = "%7B%22StoreName%22%3A%22Butler%20Plaza%20West%22%2C%22StoreNumber%22%3A1312%2C%22Option%22%3A%22ACDFJNORU%22%2C%22ShortStoreName%22%3A%22Butler%20Plaza%20West%22%7D"
-
-def getPublixProductID(itemName):
+def getPublixProductInfo(itemName):
   url = "https://services.publix.com/api/v3/product/Search?storeNumber=537&keyword=" + itemName
   api_response = requests.get(url).json()
   
   if(len(api_response["Products"]) == 0):
     return None
-  
-  return api_response["Products"][0]["Productid"]
 
-def parseLocation(location):
-  url = "https://services.publix.com/api/v3/product/Search?storeNumber=537&keyword=" + itemName
-  api_response = requests.get(url).json()
-  
-  if(len(api_response["Products"]) == 0):
-    return None
-  
-  return api_response["Products"][0]["Productid"]
+  data = api_response["Products"][0]
+  location = extractLocation(data['rsslocation'])
+
+  if 'section' in location:
+    return {
+      "productId": data["Productid"],
+      "aisle": location['aisle'],
+      "section": location['section']
+    }
+  else:
+    return {
+      "productId": data["Productid"],
+      "aisle": location['aisle'],
+    }
 
 def extractLocation(location) :
   split = location.split(' - ')
   if len(split) > 1:
     return {
-      "location": split[0],
+      "aisle": split[0],
       "section": split[1],
     }
   else:
     return {
-      "location": split[0]
+      "aisle": split[0]
     }
-
-def getItemLocation(itemName):
-  # Get product ID from Publix
-  productID = getPublixProductID(itemName)
-  if productID is None:
-    return "unknown"
-
-  url = "http://publix.com/pd/" + productID
-  
-  # Set location by sending a cookie through a session.
-  session = requests.Session()
-  session.post(url, cookies = {'Store': STORE_COOKIE})
-  
-  # Make get request for product page information.
-  request = session.get(url)
-  page = BeautifulSoup(request.content, 'html.parser')
-  
-  # Extract location from page.
-  locationTags = page.findAll("li", {"class" : "location"})
-  
-  if len(locationTags) == 0: 
-    return "unknown"
-  
-  location = locationTags[0].find("span").get_text()
-  return extractLocation(location)

@@ -2,6 +2,7 @@
 node_modules
 client/node_modules
 /dist
+*.sqlite3
 
 # env files
 .env

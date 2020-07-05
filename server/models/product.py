@@ -6,7 +6,8 @@ class Product(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
-  publixLocation = db.Column(db.String(64))
+  publixProductId = db.Column(db.String(64))
+  publixAisle = db.Column(db.String(64))
   publixSection = db.Column(db.String(64))
   obtained = db.Column(db.Boolean)
 
@@ -15,7 +16,8 @@ class Product(db.Model):
     return {
       'id': self.id,
       'name': self.name,
-      'publixLocation': self.publixLocation,
+      'publixProductId': self.publixProductId,
+      'publixAisle': self.publixAisle,
       'publixSection': self.publixSection,
       'obtained': self.obtained
     }
