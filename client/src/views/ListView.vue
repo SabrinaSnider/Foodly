@@ -3,7 +3,9 @@
     <h2 id="store-name">{{$route.params.storeName | capitalize}} Shopping List</h2>
     <div id="list">
       <ul v-for="(productList, location) in data" :id="location" v-bind:key="location">
-        <h3>{{location}}</h3>
+        <div class="location-header">
+          <h3>{{location}}</h3><span></span>
+        </div>
         <Checkbox v-for="product in productList" :key="product.id" v-bind:product="product"></Checkbox>
       </ul>
       <div id="add-item">
@@ -72,6 +74,20 @@ ul {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   padding: 20px;
+}
+
+.location-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    text-align: center; 
+    background-color: $gray; 
+    height: .1rem;
+    flex: 1;
+    margin-left: 10px;
+  }
 }
 
 #add-item {
