@@ -20,5 +20,5 @@ export function addItem(product) {
 }
 
 export function removeItem(id) {
-  return axios.delete("http://localhost:5000/delete-item", id);
+  return axios.delete("http://localhost:5000/delete-item/" + id) 
 }

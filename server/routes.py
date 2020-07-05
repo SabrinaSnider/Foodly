@@ -38,10 +38,9 @@ def add_item():
   db.session.commit()
   return jsonify(new_product.serialize())
 
-@router.route('/delete-item', methods=['DELETE'])
+@router.route('/delete-item/<databaseId>', methods=['DELETE'])
 @cross_origin()
-def delete_item():
-  databaseId = request.data
+def delete_item(databaseId):
   Product.query.filter_by(id=databaseId).delete()
   
   db.session.commit()
