@@ -2,7 +2,10 @@
   <div id="list-container" class="page">
     <h2 id="store-name">{{$route.params.storeName | capitalize}}</h2>
     <div id="list">
-      <Checkbox v-for="product in data" :key="product.id" v-bind:product="product"></Checkbox>
+      <ul v-for="(productList, location) in data" :key="location">
+        <h3>{{location}}</h3>
+        <Checkbox v-for="product in productList" :key="product.id" v-bind:product="product"></Checkbox>
+      </ul>
     </div>
   </div>
 </template>
