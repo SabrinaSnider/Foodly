@@ -32,6 +32,7 @@ export default {
   methods: {
     add: function add() {
       addItem(document.getElementById("add-item-input").value)
+      // .then(location.reload())
     }
   }
 }

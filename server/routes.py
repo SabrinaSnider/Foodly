@@ -34,4 +34,4 @@ def add_item():
 
   db.session.add(new_product)
   db.session.commit()
-  return "Added " + product + " with location " + location["location"]
+  return jsonify(new_product.serialize())
