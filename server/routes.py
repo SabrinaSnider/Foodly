@@ -41,7 +41,16 @@ def add_item():
 @router.route('/delete-item/<databaseId>', methods=['DELETE'])
 @cross_origin()
 def delete_item(databaseId):
-  Product.query.filter_by(id=databaseId).delete()
+  Product.query.filter_by(id=databaseId).first().delete()
   
   db.session.commit()
   return "Successfully deleted item"
+
+@router.route('/toggle-item-obtained/<databaseId>', methods=['POST'])
+@cross_origin()
+def toggle_item_obtained(databaseId):
+  product = Product.query.filter_by(id=databaseId).first()
+  product.obtained = not product.obtained
+  
+  db.session.commit()
+  return "Successfully toggled item obtained to " + str(product.obtained)

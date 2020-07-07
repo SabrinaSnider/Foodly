@@ -1,6 +1,6 @@
 <template>
   <div :id="id" class="checkbox-item">
-    <input type="checkbox" :required="obtained ? true : false">
+    <input type="checkbox" v-model="obtained" v-on:click="toggle">
     <div class="checkbox-label">
       <div>
         <label :for="id"> {{name}}</label>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { removeItem } from '../listData'
+import { removeItem, toggleItemObtained } from '../listData'
 
 export default {
   name: "Checkbox",
@@ -27,12 +27,15 @@ export default {
     }  
   },
   methods: {
-    deleteCheckbox: function () { 
+    deleteCheckbox: function() { 
       removeItem(this.id)
       .then(response => {
         console.log(response)
         location.reload()
       })
+    },
+    toggle: function() {
+      toggleItemObtained(this.id)
     }
   }
 }
