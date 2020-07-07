@@ -22,3 +22,11 @@ export function addItem(product) {
 export function removeItem(id) {
   return axios.delete("http://localhost:5000/delete-item/" + id) 
 }
+
+export function toggleItemObtained(id) {
+  return axios.post(
+    "http://localhost:5000/toggle-item-obtained/" + id, 
+    {},
+    axiosConfig
+  );
+}
