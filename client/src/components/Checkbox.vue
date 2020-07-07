@@ -1,11 +1,8 @@
 <template>
-  <div :id="id" class="checkbox-item">
-    <input type="checkbox" v-model="obtained" v-on:click="toggle">
+  <div class="checkbox-item">
+    <input type="checkbox" :id="id" v-model="obtained" v-on:click="toggle">
     <div class="checkbox-label">
-      <div>
-        <label :for="id"> {{name}}</label>
-        <label class="product-section" v-if="section" :for="id"> - {{section}}</label>
-      </div>
+      <label :for="id" v-bind:class="{'obtained': obtained}"> {{name}}</label>
       <img v-on:click="deleteCheckbox" type="image" class="delete-item-icon" src="/delete.svg">
     </div>
   </div>
@@ -64,8 +61,9 @@ input[type="checkbox"] {
   padding-left: 5px;
 }
 
-.product-section {
+.obtained {
   color: $gray;
+  text-decoration: line-through;
 }
 
 .delete-item-icon {
