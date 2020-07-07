@@ -2,11 +2,11 @@
   <div id="list-container" class="page">
     <h2 id="store-name">{{$route.params.storeName | capitalize}} Shopping List</h2>
     <div id="list">
-      <ul v-for="(productList, aisle) in data" v-bind:id="aisle" v-bind:key="aisle">
+      <ul v-for="productList in data" v-bind:id="aisle" v-bind:key="productList[0]">
         <div class="aisle-header">
-          <h3>{{aisle}}</h3><span></span>
+          <h3>{{productList[0]}}</h3><span></span>
         </div>
-        <Checkbox v-for="product in productList" :key="product.id" v-bind:product="product"></Checkbox>
+        <Checkbox v-for="product in productList[1]" :key="product.id" v-bind:product="product"></Checkbox>
       </ul>
       <div id="add-item">
         <img v-on:click="add" type="image" id="add-item-icon" src="/plus.svg">

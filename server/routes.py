@@ -1,7 +1,7 @@
 from flask import request, render_template
 from flask_cors import cross_origin, CORS
 from scrapers.Publix import getPublixProductInfo
-from helper.pandasOperations import groupByLocation
+from helper.pandasOperations import groupByLocationAndSort
 from flask import Blueprint
 from models import db
 from models.product import Product
@@ -13,10 +13,10 @@ CORS(router)
 @router.route('/all', methods=['GET'])
 def getAllProducts():
   products = Product.query.all()
-  jsonUnsoredTable = [i.serialize() for i in products]
-  if not jsonUnsoredTable:
+  jsonTable = [i.serialize() for i in products]
+  if not jsonTable:
     return None
-  return jsonify(groupByLocation(jsonUnsoredTable, "publixAisle").to_dict())
+  return jsonify(groupByLocationAndSort(jsonTable, "publixAisle"))
 
 @router.route('/add-item', methods=['POST'])
 @cross_origin()
