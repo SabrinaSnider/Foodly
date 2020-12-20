@@ -1,18 +1,23 @@
 <template>
   <div class="checkbox-item">
-    <input type="checkbox" :id="id" v-model="obtained" v-on:click="toggle">
+    <input type="checkbox" :id="id" v-model="obtained" v-on:click="toggle" />
     <div class="checkbox-label">
-      <label :for="id" v-bind:class="{'obtained': obtained}"> {{name}}</label>
-      <img v-on:click="deleteCheckbox" type="image" class="delete-item-icon" src="/delete.svg">
+      <label :for="id" v-bind:class="{ obtained: obtained }"> {{ name }}</label>
+      <img
+        v-on:click="deleteCheckbox"
+        type="image"
+        class="delete-item-icon"
+        src="/delete.svg"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { removeItem, toggleItemObtained } from '../listData'
+import { removeItem, toggleItemObtained } from '../listData';
 
 export default {
-  name: "Checkbox",
+  name: 'Checkbox',
   props: ['product'],
   data() {
     return {
@@ -21,27 +26,26 @@ export default {
       location: this.product.publixLocation,
       section: this.product.publixSection,
       obtained: this.product.obtained,
-    }  
+    };
   },
   methods: {
-    deleteCheckbox: function() { 
-      removeItem(this.id)
-      .then(response => {
-        console.log(response)
-        location.reload()
-      })
+    deleteCheckbox: function() {
+      removeItem(this.id).then((response) => {
+        console.log(response);
+        location.reload();
+      });
     },
     toggle: function() {
-      toggleItemObtained(this.id)
-    }
-  }
-}
+      toggleItemObtained(this.id);
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 @import '../scss/colors';
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   height: 15px;
   width: 15px;
 }
@@ -67,9 +71,15 @@ input[type="checkbox"] {
 }
 
 .delete-item-icon {
-  height: 15px;
-  width: 15px;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 50%;
   margin-left: 20px;
   cursor: pointer;
+}
+
+.delete-item-icon:hover {
+  background-color: $offWhite;
 }
 </style>

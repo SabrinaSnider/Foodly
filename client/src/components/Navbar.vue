@@ -10,8 +10,8 @@
 <script>
 export default {
   name: 'Navbar',
-  props: ['isLoggedIn']
-}
+  props: ['isLoggedIn'],
+};
 </script>
 
 <style scoped lang="scss">
@@ -26,9 +26,9 @@ nav {
   position: sticky;
 
   // Shadow
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 h1 {
@@ -36,7 +36,6 @@ h1 {
   font-weight: 700;
   font-size: 1.6rem;
   color: $green;
-
 }
 
 a {
@@ -53,7 +52,6 @@ a {
 a.bordered {
   border-radius: 3px;
   border: 2px solid $green;
-
 }
 
 a.bordered:hover {

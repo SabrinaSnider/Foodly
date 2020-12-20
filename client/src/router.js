@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import ListView from './views/ListView.vue';
+import List from './views/List.vue';
 
 Vue.use(VueRouter);
 
@@ -10,8 +10,8 @@ export default new VueRouter({
   routes: [
     {
       path: '/list/:storeName',
-      name: 'ListView',
-      component: ListView,
+      name: 'List',
+      component: List,
     }
   ],
 });
