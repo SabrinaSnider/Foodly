@@ -1,16 +1,17 @@
 from flask import request, render_template
 from flask_cors import cross_origin, CORS
-from scrapers.Publix import getPublixProductInfo
+from scrapers.publix import getPublixProductInfo
 from helper.pandasOperations import groupByLocationAndSort
 from flask import Blueprint
 from models import db
 from models.product import Product
 from flask import jsonify
 
-router = Blueprint('routes', __name__,)
-CORS(router)
 
-@router.route('/all', methods=['GET'])
+publix = Blueprint('routes', __name__,)
+CORS(publix)
+
+@publix.route('/all', methods=['GET'])
 def getAllProducts():
   products = Product.query.all()
   jsonTable = [i.serialize() for i in products]
@@ -18,7 +19,7 @@ def getAllProducts():
     return None
   return jsonify(groupByLocationAndSort(jsonTable, "publixAisle"))
 
-@router.route('/add-item', methods=['POST'])
+@publix.route('/add-item', methods=['POST'])
 @cross_origin()
 def add_item():
   name = request.json['product']
@@ -38,15 +39,15 @@ def add_item():
   db.session.commit()
   return jsonify(new_product.serialize())
 
-@router.route('/delete-item/<databaseId>', methods=['DELETE'])
+@publix.route('/delete-item/<databaseId>', methods=['DELETE'])
 @cross_origin()
 def delete_item(databaseId):
-  Product.query.filter_by(id=databaseId).first().delete()
+  Product.query.filter_by(id=databaseId).delete()
   
   db.session.commit()
   return "Successfully deleted item"
 
-@router.route('/toggle-item-obtained/<databaseId>', methods=['POST'])
+@publix.route('/toggle-item-obtained/<databaseId>', methods=['POST'])
 @cross_origin()
 def toggle_item_obtained(databaseId):
   product = Product.query.filter_by(id=databaseId).first()

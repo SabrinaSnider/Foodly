@@ -1,14 +1,9 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from routes import router
+from routes.publix import publix
 from models import db
 
-
-# To start server:
-# $env:FLASK_APP = "app.py"
-# $env:FLASK_ENV = "development"
-# flask run
 
 def create_app():
   app = Flask(__name__)
@@ -28,7 +23,7 @@ def create_app():
     db.create_all()
   
   # import routes
-  app.register_blueprint(router)
+  app.register_blueprint(publix, url_prefix="/publix")
 
   return app
 
@@ -36,4 +31,4 @@ def create_app():
 app = create_app()
 
 if __name__ == '__main__':
-    app.run()
+  app.run()

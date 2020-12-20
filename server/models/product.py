@@ -1,9 +1,8 @@
 from models import db
 
 
+"""Model for grocery products."""
 class Product(db.Model):
-  """Data model for grocery products."""
-
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64))
   publixProductId = db.Column(db.String(64))
@@ -12,7 +11,6 @@ class Product(db.Model):
   obtained = db.Column(db.Boolean)
 
   def serialize(self):
-    """Return object data in easily serializable format"""
     return {
       'id': self.id,
       'name': self.name,

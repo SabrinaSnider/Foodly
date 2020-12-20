@@ -1,31 +1,34 @@
 import axios from 'axios'
 
-let axiosConfig = { 
+const SERVER_BASE_URL =
+  process.env.SERVER_BASE_URL || 'http://localhost:5000';
+
+const axiosConfig = { 
   headers: {
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*"
+    'Access-Control-Allow-Origin': '*'
   }
 }
 
 export function getAllData() {
-  return axios.get('http://localhost:5000/all')
+  return axios.get(`${SERVER_BASE_URL}/publix/all`)
 }
 
 export function addItem(product) {
   return axios.post(
-    "http://localhost:5000/add-item", 
+    `${SERVER_BASE_URL}/publix/add-item`, 
     {product: product},
     axiosConfig
   );
 }
 
 export function removeItem(id) {
-  return axios.delete("http://localhost:5000/delete-item/" + id) 
+  return axios.delete(`${SERVER_BASE_URL}/publix/delete-item/${id}`) 
 }
 
 export function toggleItemObtained(id) {
   return axios.post(
-    "http://localhost:5000/toggle-item-obtained/" + id, 
+    `${SERVER_BASE_URL}/publix/toggle-item-obtained/${id}`, 
     {},
     axiosConfig
   );

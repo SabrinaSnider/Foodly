@@ -1,6 +1,7 @@
 import pandas as pd
 from functools import cmp_to_key
 
+
 def groupByLocationAndSort(data, locationKey):
   grouped = groupByLocation(data, locationKey)
   return sorted(grouped.items(), key=cmp_to_key(compareLocation))
