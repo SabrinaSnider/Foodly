@@ -28,6 +28,7 @@ pnpm-debug.log*
 server/env/
 __pycache__/
 db.sqlite3
+*.egg-info
 
 # Anaconda Notebook
 .ipynb_checkpoints
