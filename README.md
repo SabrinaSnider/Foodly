@@ -1,6 +1,8 @@
 # Foodly
 
-Foodly is a grocery list web application that automatically gets product aisles for grocery items at Publix and organizes the list accordingly.
+Foodly is a smart grocery list app that organizes your list by store aisles.
+
+
 ![image](https://user-images.githubusercontent.com/10712922/86698390-41276580-bfdd-11ea-9ecb-b4bd13fe1bdd.png)
 
 # Table of Contents
