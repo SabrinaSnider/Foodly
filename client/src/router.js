@@ -9,7 +9,7 @@ export default new VueRouter({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/list/:storeName',
+      path: '/list/:id',
       name: 'List',
       component: List,
     }

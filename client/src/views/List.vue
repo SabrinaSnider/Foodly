@@ -1,10 +1,9 @@
 <template>
-  <div id="list-container" class="page">
-    <h2>{{ $route.params.storeName | capitalize }} Shopping List</h2>
+  <div id="list-container" class="page" v-if="groceryList">
+    <h2>{{ groceryList.name }}</h2>
     <div id="list">
       <ul
-        v-for="productList in data"
-        v-bind:id="aisle"
+        v-for="productList in groceryList.products"
         v-bind:key="productList[0]"
       >
         <div class="aisle-header">
@@ -14,6 +13,7 @@
         <Checkbox
           v-for="product in productList[1]"
           :key="product.id"
+          v-bind:listId="listId"
           v-bind:product="product"
         ></Checkbox>
       </ul>
@@ -32,7 +32,7 @@
 
 <script>
 import Checkbox from '../components/Checkbox';
-import { getAllData, addItem } from '../listData';
+import { getList, addProduct } from '../listData';
 
 export default {
   name: 'ListView',
@@ -40,19 +40,21 @@ export default {
     Checkbox,
   },
   data() {
-    return { data: {} };
+    return { groceryList: {}, listId: this.$route.params.id };
   },
-  mounted() {
-    getAllData().then((response) => (this.data = response.data));
+  async mounted() {
+    const response = await getList(this.$route.params.id);
+    this.groceryList = response.data;
   },
   methods: {
     add: function add() {
-      addItem(document.getElementById('add-item-input').value).then(
-        (response) => {
-          console.log(response);
-          location.reload();
-        }
-      );
+      addProduct(
+        this.$route.params.id,
+        document.getElementById('add-item-input').value
+      ).then((response) => {
+        console.log(response);
+        location.reload();
+      });
     },
   },
 };

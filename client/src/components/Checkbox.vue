@@ -1,8 +1,15 @@
 <template>
   <div class="checkbox-item">
-    <input type="checkbox" :id="id" v-model="obtained" v-on:click="toggle" />
+    <input
+      type="checkbox"
+      :id="productId"
+      v-model="obtained"
+      v-on:click="toggleCheckbox"
+    />
     <div class="checkbox-label">
-      <label :for="id" v-bind:class="{ obtained: obtained }"> {{ name }}</label>
+      <label :for="productId" v-bind:class="{ obtained: obtained }">
+        {{ name }}</label
+      >
       <img
         v-on:click="deleteCheckbox"
         type="image"
@@ -14,14 +21,14 @@
 </template>
 
 <script>
-import { removeItem, toggleItemObtained } from '../listData';
+import { deleteProduct, toggleProduct } from '../listData';
 
 export default {
   name: 'Checkbox',
-  props: ['product'],
+  props: ['product', 'listId'],
   data() {
     return {
-      id: this.product.id,
+      productId: this.product.id,
       name: this.product.name,
       location: this.product.publixLocation,
       section: this.product.publixSection,
@@ -29,14 +36,12 @@ export default {
     };
   },
   methods: {
-    deleteCheckbox: function() {
-      removeItem(this.id).then((response) => {
-        console.log(response);
-        location.reload();
-      });
+    deleteCheckbox: async function() {
+      await deleteProduct(this.listId, this.productId);
+      location.reload();
     },
-    toggle: function() {
-      toggleItemObtained(this.id);
+    toggleCheckbox: async function() {
+      await toggleProduct(this.listId, this.productId);
     },
   },
 };

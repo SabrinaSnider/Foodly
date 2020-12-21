@@ -6,29 +6,30 @@ const SERVER_BASE_URL =
 const axiosConfig = { 
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS"
   }
 }
 
-export function getAllData() {
-  return axios.get(`${SERVER_BASE_URL}/publix/all`)
+export function getList(listId) {
+  return axios.get(`${SERVER_BASE_URL}/lists/${listId}`)
 }
 
-export function addItem(product) {
+export function addProduct(listId, product) {
   return axios.post(
-    `${SERVER_BASE_URL}/publix/add-item`, 
+    `${SERVER_BASE_URL}/lists/${listId}/add-product`, 
     {product: product},
     axiosConfig
   );
 }
 
-export function removeItem(id) {
-  return axios.delete(`${SERVER_BASE_URL}/publix/delete-item/${id}`) 
+export function deleteProduct(listId, productId) {
+  return axios.delete(`${SERVER_BASE_URL}/lists/${listId}/delete-product/${productId}`) 
 }
 
-export function toggleItemObtained(id) {
+export function toggleProduct(listId, productId) {
   return axios.post(
-    `${SERVER_BASE_URL}/publix/toggle-item-obtained/${id}`, 
+    `${SERVER_BASE_URL}/lists/${listId}/toggle-product/${productId}`, 
     {},
     axiosConfig
   );

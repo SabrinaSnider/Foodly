@@ -29,14 +29,14 @@ def get_lists():
   json_lists = [i.serialize() for i in lists]
   return json_lists
 
-def get_products(list_id):
+def get_list(list_id):
   if not list_id: raise ValueError(INVALID_PARAMS_ERROR)
   grocery_list_object = GroceryList.query.get(list_id)
   if grocery_list_object is None: raise ValueError(INVALID_PARAMS_ERROR)
 
-  products = grocery_list_object.products
-  json_products = [i.serialize() for i in products]
-  return {} if not json_products else organize_list(json_products, "publix_aisle")
+  grocery_list = grocery_list_object.serialize()
+  grocery_list['products'] = organize_list(grocery_list['products'], "publix_aisle")
+  return grocery_list
 
 def add_product(list_id, product):
   if not list_id or not product: raise ValueError(INVALID_PARAMS_ERROR)

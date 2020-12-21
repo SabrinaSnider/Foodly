@@ -2,7 +2,7 @@ from flask import request, render_template
 from flask_cors import cross_origin, CORS
 from flask import Blueprint
 from flask import jsonify
-from services.grocery_list import create, delete, get_lists, get_products, add_product, delete_product, toggle_product
+from services.grocery_list import *
 
 
 grocery_list_router = Blueprint('grocery_list_rotues', __name__,)
@@ -35,10 +35,10 @@ def get_lists_endpoint():
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<list_id>/products', methods=['GET'])
-def get_products_endpoint(list_id):
+@grocery_list_router.route('/<list_id>', methods=['GET'])
+def get_list_endpoint(list_id):
   try:
-    data = get_products(list_id)
+    data = get_list(list_id)
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
@@ -46,9 +46,9 @@ def get_products_endpoint(list_id):
 @grocery_list_router.route('/<list_id>/add-product', methods=['POST'])
 @cross_origin()
 def add_product_endpoint(list_id):
-  if not request.json or 'name' not in request.json: return {'error': 'Invalid name.'}, 500
+  if not request.json or 'product' not in request.json: return {'error': 'Invalid product name.'}, 500
   try:
-    data = add_product(list_id, request.json['name'])
+    data = add_product(list_id, request.json['product'])
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
