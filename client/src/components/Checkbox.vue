@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { deleteProduct, toggleProduct } from '../listData';
+import { deleteProduct, toggleProduct } from '../utils/serverUtils';
 
 export default {
   name: 'Checkbox',

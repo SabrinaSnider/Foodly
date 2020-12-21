@@ -32,13 +32,11 @@
 
 <script>
 import Checkbox from '../components/Checkbox';
-import { getList, addProduct } from '../listData';
+import { getList, addProduct } from '../utils/serverUtils';
 
 export default {
-  name: 'ListView',
-  components: {
-    Checkbox,
-  },
+  name: 'List',
+  components: { Checkbox },
   data() {
     return { groceryList: {}, listId: this.$route.params.id };
   },
