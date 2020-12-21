@@ -12,5 +12,6 @@ class GroceryList(db.Model):
   def serialize(self):
     return {
       'id': self.id,
-      'name': self.name
+      'name': self.name,
+      'products': [i.serialize() for i in self.products],
     }
