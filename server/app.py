@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from routes.publix import publix
 from routes.groceryList import grocery_list_router
 from models import db
 
