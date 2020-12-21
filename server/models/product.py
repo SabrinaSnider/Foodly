@@ -10,16 +10,14 @@ class Product(db.Model):
   grocery_list_id = db.Column(db.Integer, db.ForeignKey('GroceryList.id'))
   obtained = db.Column(db.Boolean)
 
-  publixProductId = db.Column(db.String(64))
-  publixAisle = db.Column(db.String(64))
-  publixSection = db.Column(db.String(64))
+  publix_aisle = db.Column(db.String(64))
+  publix_section = db.Column(db.String(64))
   
   def serialize(self):
     return {
       'id': self.id,
       'name': self.name,
-      'publixProductId': self.publixProductId,
-      'publixAisle': self.publixAisle,
-      'publixSection': self.publixSection,
+      'publix_aisle': self.publix_aisle,
+      'publix_section': self.publix_section,
       'obtained': self.obtained
     }

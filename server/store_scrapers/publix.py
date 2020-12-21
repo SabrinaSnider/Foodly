@@ -1,7 +1,7 @@
 import requests
 
 
-def getPublixProductInfo(itemName):
+def get_product_info(itemName):
   url = "https://services.publix.com/api/v3/product/Search?storeNumber=537&keyword=" + itemName
   api_response = requests.get(url).json()
   
@@ -13,15 +13,11 @@ def getPublixProductInfo(itemName):
 
   if 'section' in location:
     return {
-      "productId": data["Productid"],
       "aisle": location['aisle'],
       "section": location['section']
     }
   else:
-    return {
-      "productId": data["Productid"],
-      "aisle": location['aisle'],
-    }
+    return {"aisle": location['aisle']}
 
 def extractLocation(location) :
   split = location.split(' - ')
@@ -31,6 +27,4 @@ def extractLocation(location) :
       "section": split[1],
     }
   else:
-    return {
-      "aisle": split[0]
-    }
+    return {"aisle": split[0]}

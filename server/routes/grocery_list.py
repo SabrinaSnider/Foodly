@@ -2,7 +2,7 @@ from flask import request, render_template
 from flask_cors import cross_origin, CORS
 from flask import Blueprint
 from flask import jsonify
-from services.groceryList import create, delete, get_lists, get_products, add_product, delete_product, toggle_product
+from services.grocery_list import create, delete, get_lists, get_products, add_product, delete_product, toggle_product
 
 
 grocery_list_router = Blueprint('grocery_list_rotues', __name__,)
@@ -18,11 +18,11 @@ def create_endpoint():
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<listId>/delete', methods=['DELETE'])
+@grocery_list_router.route('/<list_id>/delete', methods=['DELETE'])
 @cross_origin()
-def delete_endpoint(listId):
+def delete_endpoint(list_id):
   try:
-    data = delete(listId)
+    data = delete(list_id)
     return data
   except ValueError as e:
     return {'error': str(e)}, 500
@@ -35,37 +35,38 @@ def get_lists_endpoint():
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<id>/products', methods=['GET'])
-def get_products_endpoint(id):
+@grocery_list_router.route('/<list_id>/products', methods=['GET'])
+def get_products_endpoint(list_id):
   try:
-    data = get_products(id)
+    data = get_products(list_id)
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<id>/add-product', methods=['POST'])
+@grocery_list_router.route('/<list_id>/add-product', methods=['POST'])
 @cross_origin()
-def add_product_endpoint(id):
+def add_product_endpoint(list_id):
+  if not request.json or 'name' not in request.json: return {'error': 'Invalid name.'}, 500
   try:
-    data = add_product(id)
+    data = add_product(list_id, request.json['name'])
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<listId>/delete-product/<itemId>', methods=['DELETE'])
+@grocery_list_router.route('/<list_id>/delete-product/<item_id>', methods=['DELETE'])
 @cross_origin()
-def delete_product_endpoint(listId, itemId):
+def delete_product_endpoint(list_id, item_id):
   try:
-    data = delete_product(id)
+    data = delete_product(list_id, item_id)
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
 
-@grocery_list_router.route('/<listId>/toggle-product/<itemId>', methods=['POST'])
+@grocery_list_router.route('/<list_id>/toggle-product/<item_id>', methods=['POST'])
 @cross_origin()
-def toggle_product_endpoint(listId, itemId):
+def toggle_product_endpoint(list_id, item_id):
   try:
-    data = toggle_product(id)
+    data = toggle_product(list_id, item_id)
     return jsonify(data)
   except ValueError as e:
     return {'error': str(e)}, 500
