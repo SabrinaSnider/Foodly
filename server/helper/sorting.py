@@ -4,7 +4,7 @@ from functools import cmp_to_key
 
 def organize_list(data, location_key):
   grouped = group_by_location(data, location_key)
-  return sorted(grouped.items(), key=cmp_to_key(compare_location))
+  return grouped if grouped is None else sorted(grouped.items(), key=cmp_to_key(compare_location))
 
 def group_by_location(data, location_key):
   if not data: return None
