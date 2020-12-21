@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from routes.publix import publix
+from routes.grocery_list import grocery_list_router
 from models import db
 
 
@@ -23,7 +23,7 @@ def create_app():
     db.create_all()
   
   # import routes
-  app.register_blueprint(publix, url_prefix="/publix")
+  app.register_blueprint(grocery_list_router, url_prefix="/lists")
 
   return app
 
