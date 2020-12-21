@@ -1,8 +1,7 @@
 <template>
-  <div>
-    hello world
+  <v-container class="pa-12">
     <ListCard></ListCard>
-  </div>
+  </v-container>
 </template>
 
 <script>

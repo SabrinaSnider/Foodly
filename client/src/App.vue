@@ -1,13 +1,12 @@
 <template>
-  <div id="app">
+  <v-app>
     <Navbar v-bind:isLoggedIn="false"></Navbar>
     <router-view></router-view>
-  </div>
+  </v-app>
 </template>
 
 <script>
 import Navbar from './components/Navbar';
-
 export default {
   name: 'app',
   components: {
@@ -25,17 +24,5 @@ export default {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100vh;
-  background-color: white;
-}
-
-.page {
-  flex-grow: 1;
 }
 </style>
