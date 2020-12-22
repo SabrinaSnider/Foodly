@@ -75,7 +75,7 @@ $rounded: 15px;
     font-weight: 600;
     text-align: center;
     color: white;
-    background-color: $green;
+    background-color: $primary;
   }
 
   #list {
