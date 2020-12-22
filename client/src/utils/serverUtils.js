@@ -11,8 +11,16 @@ const axiosConfig = {
   }
 }
 
+export function getLists() {
+  return axios.get(`${SERVER_BASE_URL}/lists/get-lists`)
+}
+
 export function getList(listId) {
   return axios.get(`${SERVER_BASE_URL}/lists/${listId}`)
+}
+
+export function deleteList(listId) {
+  return axios.delete(`${SERVER_BASE_URL}/lists/${listId}/delete`) 
 }
 
 export function addProduct(listId, product) {

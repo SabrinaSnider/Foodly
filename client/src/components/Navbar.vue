@@ -1,6 +1,6 @@
 <template>
   <nav id="nabar">
-    <h1>FOODLY</h1>
+    <h1 v-on:click="openDashboard">FOODLY</h1>
 
     <a v-if="isLoggedIn">Log Out</a>
     <a class="bordered" v-else>Log In</a>
@@ -8,9 +8,16 @@
 </template>
 
 <script>
+import router from '../router';
+
 export default {
   name: 'Navbar',
   props: ['isLoggedIn'],
+  methods: {
+    openDashboard: function openDashboard() {
+      router.push('/dashboard');
+    },
+  },
 };
 </script>
 
@@ -36,6 +43,7 @@ h1 {
   font-weight: 700;
   font-size: 1.6rem;
   color: $green;
+  cursor: pointer;
 }
 
 a {

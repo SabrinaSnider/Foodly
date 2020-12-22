@@ -15,7 +15,7 @@ export default new VueRouter({
       component: Dashboard,
     },
     {
-      path: '/list/:id',
+      path: '/lists/:id',
       name: 'List',
       component: List,
     }
