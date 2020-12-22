@@ -6,7 +6,22 @@
     </v-app-bar>
 
     <v-navigation-drawer app clipped v-model="drawer">
-      <v-list dense> </v-list>
+      <v-list dense>
+        <v-subheader>GROCERY LISTS</v-subheader>
+        <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item
+            v-for="groceryList in groceryLists"
+            :key="groceryList.id"
+          >
+            <v-list-item-content>
+              <v-list-item-title
+                v-on:click="openList(groceryList.id)"
+                v-text="groceryList.name"
+              ></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-navigation-drawer>
 
     <v-content>
@@ -17,15 +32,23 @@
 
 <script>
 import router from './router';
+import { getLists } from './utils/serverUtils';
 
 export default {
   name: 'app',
   data() {
-    return { drawer: 'open' };
+    return { drawer: 'open', groceryLists: [] };
+  },
+  async mounted() {
+    const response = await getLists();
+    this.groceryLists = response.data;
   },
   methods: {
     openDashboard: function openDashboard() {
       router.push('/dashboard');
+    },
+    openList: function openList(listId) {
+      router.push(`/lists/${listId}`);
     },
   },
 };
