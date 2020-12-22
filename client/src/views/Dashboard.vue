@@ -1,7 +1,7 @@
 <template>
-  <v-container pa-4>
+  <v-container pa-4 fluid>
     <v-layout>
-      <v-flex align-center justify-center row>
+      <v-flex align-center justify-start row>
         <ListCard
           v-for="groceryList in groceryLists"
           :key="groceryList.id"
